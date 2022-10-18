@@ -18,7 +18,7 @@ export const Login = () => {
     };
 
     fetch(
-      "https://4geeksacade-reactflaskh-jt0quklw2uq.ws-us71.gitpod.io/api//token",
+      "https://3001-mauriciio89-pythonflask-layw066rc8x.ws-us71.gitpod.io/api/token",
       opts
         .then((resp) => {
           if (resp.status === 200) return resp.json();
