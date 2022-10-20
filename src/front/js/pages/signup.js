@@ -3,11 +3,10 @@ import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
-export const Login = () => {
+export const Signup = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [accessToken, setAccessToken] = useState("");
 
   const handleClick = () => {
     const opts = {
@@ -15,7 +14,7 @@ export const Login = () => {
       password: password,
     };
     fetch(
-      "https://3001-mauriciio89-pythonflask-zfm8dnw9s8a.ws-us72.gitpod.io/api/token",
+      "https://3001-mauriciio89-pythonflask-zfm8dnw9s8a.ws-us72.gitpod.io/api/signup",
       {
         method: "POST",
         headers: {
@@ -29,10 +28,7 @@ export const Login = () => {
         else alert("there has been some error");
       })
       .then((data) => {
-        //console.log(data);
-        //sessionStorage.setItem("accesToken", data.accessToken);
-        //console.log(store.accessToken);
-        console.log("Este es el token");
+        console.log(data);
       })
       .catch((error) => {
         console.error("there was an error!!!", error);
@@ -41,7 +37,7 @@ export const Login = () => {
 
   return (
     <div className="text-center mt-5">
-      <h1>Login</h1>
+      <h1>SignUp</h1>
       <div>
         <input
           type="text"

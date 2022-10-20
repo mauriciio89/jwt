@@ -34,4 +34,27 @@ def create_token():
     return jsonify(response_body), 200
 
 
+@api.route("/signup", methods=["POST"])
+def new_user():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    new_user = User(email=email, password=password, is_active=True)
+    db.session.add(new_user)
+    db.session.commit()
+    response_body={
+        "msg": "usuario registrado exitosamente"
+    }
+
+    return jsonify(response_body), 200
+
+
+@api.route("/private", methods=["GET"])    
+@jwt_required()
+def cargar_datos():
+    email=get_jwt_identity()
+    response_body={
+        "email": email,
+        "msg": "Bienvenido a la pagina privada"
+    }
+    return jsonify(response_body), 200
 
