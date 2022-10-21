@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { useNavigate } from "react-router-dom";
 
 export const Signup = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleClick = () => {
     const opts = {
@@ -14,12 +16,13 @@ export const Signup = () => {
       password: password,
     };
     fetch(
-      "https://3001-mauriciio89-pythonflask-zfm8dnw9s8a.ws-us72.gitpod.io/api/signup",
+      "https://3001-mauriciio89-jwt-1ku18w4m7lz.ws-us72.gitpod.io/api/signup",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        mode: "cors",
         body: JSON.stringify(opts),
       }
     )
@@ -29,6 +32,7 @@ export const Signup = () => {
       })
       .then((data) => {
         console.log(data);
+        navigate("/login");
       })
       .catch((error) => {
         console.error("there was an error!!!", error);
@@ -51,7 +55,7 @@ export const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleClick}>Login</button>
+        <button onClick={handleClick}>SignUp</button>
       </div>
     </div>
   );

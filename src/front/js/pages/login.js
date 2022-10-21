@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [accessToken, setAccessToken] = useState("");
+  const navigate = useNavigate();
 
   const handleClick = () => {
     const opts = {
@@ -15,12 +17,13 @@ export const Login = () => {
       password: password,
     };
     fetch(
-      "https://3001-mauriciio89-pythonflask-zfm8dnw9s8a.ws-us72.gitpod.io/api/token",
+      "https://3001-mauriciio89-jwt-1ku18w4m7lz.ws-us72.gitpod.io/api/token",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        mode: "cors",
         body: JSON.stringify(opts),
       }
     )
@@ -29,10 +32,11 @@ export const Login = () => {
         else alert("there has been some error");
       })
       .then((data) => {
-        //console.log(data);
-        //sessionStorage.setItem("accesToken", data.accessToken);
-        //console.log(store.accessToken);
+        // console.log(data);
+        localStorage.setItem("accessToken", data.accessToken);
+        console.log(localStorage.getItem("accessToken"));
         console.log("Este es el token");
+        navigate("/private");
       })
       .catch((error) => {
         console.error("there was an error!!!", error);
